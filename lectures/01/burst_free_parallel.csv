@@ -1,0 +1,31 @@
+model,question,run,status,ttft_s,latency_s,input_tokens,output_tokens,thoughts_tokens,total_tokens,error,quota_id,quota_value,retry_delay
+gemini-3.5-flash-lite,short,1,200,6.825724952999735,6.937963329000013,14,3,0,17,,,,
+gemini-3.5-flash-lite,short,2,200,5.64977623499999,5.750041804999455,14,3,0,17,,,,
+gemini-3.5-flash-lite,short,3,200,6.485693409000305,6.54239695599972,14,1,0,15,,,,
+gemini-3.5-flash-lite,short,4,200,5.2481304299999465,5.283613880000303,14,1,0,15,,,,
+gemini-3.5-flash-lite,short,5,200,5.247774888999629,5.342095715999676,14,3,0,17,,,,
+gemini-3.5-flash-lite,short,6,200,5.550174113999674,5.599353572999462,14,1,0,15,,,,
+gemini-3.5-flash-lite,short,7,200,5.72525049899923,5.782410021999567,14,1,0,15,,,,
+gemini-3.5-flash-lite,short,8,200,5.486563277999267,5.536980373000006,14,1,0,15,,,,
+gemini-3.5-flash-lite,short,9,200,5.977502791000006,6.076839772999847,14,3,0,17,,,,
+gemini-3.5-flash-lite,short,10,200,6.522484227999485,6.6184335029993235,14,3,0,17,,,,
+gemini-3.5-flash-lite,short,11,200,6.652639082999485,6.760712917999626,14,3,0,17,,,,
+gemini-3.5-flash-lite,short,12,200,10.098893702000169,10.199344552999719,14,3,0,17,,,,
+gemini-3.5-flash-lite,short,13,200,7.029081466000207,7.222502820000045,14,1,0,15,,,,
+gemini-3.5-flash-lite,short,14,200,5.588615914000002,5.870026681000127,14,3,0,17,,,,
+gemini-3.5-flash-lite,short,15,200,7.731757378000111,7.83015880000039,14,3,0,17,,,,
+gemini-3.5-flash-lite,short,16,200,14.257094231999872,14.366539565000494,14,3,0,17,,,,
+gemini-3.5-flash-lite,short,17,429,,,,,,,"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to",GenerateRequestsPerMinutePerProjectPerModel-FreeTier,15,49s
+gemini-3.5-flash-lite,short,18,200,7.2249141570000575,7.273714466000456,14,1,0,15,,,,
+gemini-3.5-flash-lite,short,19,429,,,,,,,"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to",GenerateRequestsPerMinutePerProjectPerModel-FreeTier,15,49s
+gemini-3.5-flash-lite,short,20,429,,,,,,,"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to",GenerateRequestsPerMinutePerProjectPerModel-FreeTier,15,48s
+gemini-3.5-flash-lite,short,21,429,,,,,,,"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to",GenerateRequestsPerMinutePerProjectPerModel-FreeTier,15,48s
+gemini-3.5-flash-lite,short,22,429,,,,,,,"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to",GenerateRequestsPerMinutePerProjectPerModel-FreeTier,15,48s
+gemini-3.5-flash-lite,short,23,429,,,,,,,"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to",GenerateRequestsPerMinutePerProjectPerModel-FreeTier,15,48s
+gemini-3.5-flash-lite,short,24,429,,,,,,,"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to",GenerateRequestsPerMinutePerProjectPerModel-FreeTier,15,48s
+gemini-3.5-flash-lite,short,25,429,,,,,,,"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to",GenerateRequestsPerMinutePerProjectPerModel-FreeTier,15,48s
+gemini-3.5-flash-lite,short,26,429,,,,,,,"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to",GenerateRequestsPerMinutePerProjectPerModel-FreeTier,15,48s
+gemini-3.5-flash-lite,short,27,429,,,,,,,"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to",GenerateRequestsPerMinutePerProjectPerModel-FreeTier,15,48s
+gemini-3.5-flash-lite,short,28,429,,,,,,,"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to",GenerateRequestsPerMinutePerProjectPerModel-FreeTier,15,48s
+gemini-3.5-flash-lite,short,29,429,,,,,,,"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to",GenerateRequestsPerMinutePerProjectPerModel-FreeTier,15,48s
+gemini-3.5-flash-lite,short,30,429,,,,,,,"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to",GenerateRequestsPerMinutePerProjectPerModel-FreeTier,15,48s
