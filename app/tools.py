@@ -5,11 +5,16 @@
 """
 
 import json
+import random
+import re
+from datetime import datetime
 from functools import cache
 from pathlib import Path
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 MAX_RESULTS = 3
+# 学習ログの保存先（.gitignore 済み。個人の記録なので共有しない）
+LOG_DIR = DATA_DIR.parent / "learning_log"
 
 
 @cache
@@ -77,3 +82,41 @@ def get_lecture_summary(lecture: int) -> str:
         available = sorted(p.stem for p in (DATA_DIR / "lectures").glob("*.md"))
         return f"第{lecture}回の要点はまだありません。用意されている回: {', '.join(available)}"
     return path.read_text(encoding="utf-8")
+
+
+def make_quiz(lecture: int) -> dict:
+    """指定した回（1始まりの整数）で扱う用語から1つ選び、「○○の意味は？」という小テストを作る。
+
+    「第2回の復習問題を出して」「クイズを出して」のように、学習者が理解度を
+    確かめたいときに使う。返り値は {"question": 問題文, "answer": 模範解答} の辞書。
+    出題するときは question だけを見せ、answer は学習者が答えた後の答え合わせに使うこと。
+    """
+    terms = [e for e in load_glossary() if e["lecture"] == lecture]
+    if not terms:
+        available = sorted({e["lecture"] for e in load_glossary()})
+        return {
+            "question": "",
+            "answer": f"第{lecture}回の用語は用語集にありません。用語がある回: {', '.join(map(str, available))}",
+        }
+    entry = random.choice(terms)
+    return {"question": f"「{entry['term']}」の意味は？", "answer": entry["definition"]}
+
+
+def save_learning_log(title: str, content: str) -> str:
+    """学習の記録を learning_log/ フォルダに Markdown ファイルとして保存する。
+
+    利用者が「今日学んだことを記録して」「この内容をログに残して」のように、
+    学習の記録を残したいと頼んだときだけ使う。頼まれていないのに勝手に保存しない。
+    title には記録の短い見出し（例: "第3回 エージェントとツール"）、
+    content には保存する本文（学んだこと・疑問点などを Markdown で）を入れる。
+    ファイルが作られるので、実行前に利用者の承認が必要になる。
+    """
+    # 見出しはファイル名にも使うので、パス区切りなどファイル名に使えない文字を除く
+    safe_title = re.sub(r'[\\/:*?"<>|\s]+', "_", title).strip("._")[:50] or "log"
+    now = datetime.now()
+    LOG_DIR.mkdir(exist_ok=True)
+    path = LOG_DIR / f"{now:%Y%m%d-%H%M%S}_{safe_title}.md"
+    # "x" モード: 同名のファイルがあれば上書きせずにエラーにする
+    with open(path, "x", encoding="utf-8") as f:
+        f.write(f"# {title}\n\n- 日時: {now:%Y-%m-%d %H:%M}\n\n{content.strip()}\n")
+    return f"学習ログを保存しました: learning_log/{path.name}"

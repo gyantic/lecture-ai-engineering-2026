@@ -40,3 +40,26 @@ def test_glossary_result_reaches_the_model():
         result = agent.run_sync("RAGとは？")
     returns = _parts(result, ToolReturnPart)
     assert returns and returns[0].tool_name == "search_glossary"
+
+
+def test_save_learning_log_waits_for_approval(tmp_path, monkeypatch):
+    """承認が必要なツールは実行されずに止まり、拒否すればファイルは作られない。"""
+    from pydantic_ai import DeferredToolResults, ToolDenied
+
+    from app import tools
+
+    monkeypatch.setattr(tools, "LOG_DIR", tmp_path / "learning_log")
+    model = TestModel(call_tools=["save_learning_log"])
+    with agent.override(model=model):
+        result = agent.run_sync("学習ログを保存して")
+        assert isinstance(result.output, DeferredToolRequests)
+        assert [c.tool_name for c in result.output.approvals] == ["save_learning_log"]
+        assert not tools.LOG_DIR.exists()  # まだ保存されていない
+
+        call_id = result.output.approvals[0].tool_call_id
+        denied = agent.run_sync(
+            message_history=result.all_messages(),
+            deferred_tool_results=DeferredToolResults(approvals={call_id: ToolDenied("拒否")}),
+        )
+    assert isinstance(denied.output, str)
+    assert not tools.LOG_DIR.exists()
