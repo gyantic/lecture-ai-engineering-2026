@@ -46,3 +46,13 @@ def test_default_question_of_lecture1_is_answerable_from_glossary():
     assert "3レベル" in DEFAULT_QUESTION
     hits = json.loads(tools.search_glossary("3レベル"))
     assert hits[0]["term"] == "宿題の3レベル"
+
+
+def test_save_learning_log_writes_markdown(tmp_path, monkeypatch):
+    monkeypatch.setattr(tools, "LOG_DIR", tmp_path / "learning_log")
+    message = tools.save_learning_log("第3回 ../ツール", "- エージェント = モデル + ループ + ツール")
+    files = list((tmp_path / "learning_log").glob("*.md"))
+    assert len(files) == 1 and files[0].name in message
+    assert "/" not in files[0].name.split("_", 1)[1]  # 見出しのパス区切りはファイル名に残らない
+    text = files[0].read_text(encoding="utf-8")
+    assert text.startswith("# 第3回 ../ツール") and "モデル + ループ + ツール" in text
